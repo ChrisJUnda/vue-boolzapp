@@ -21,7 +21,7 @@
 <!--BODY-->
 
 <body>
-    <div id="app" class="container">
+    <div id="app" class="container" v-cloak>
         <div class="row">
             <div class="contacts">
 
@@ -66,7 +66,7 @@
 
                 <!--LISTA DEI CONTATTI-->
                 <div class="contact-list ">
-                    <div class="contact-card" v-for="(elements, index) in contacts" @click="changeUser(index)">
+                    <div class="contact-card" v-for="(elements, index) in contacts" @click="changeUser(index)" :class="{ selected_card : userIndex === index}" >
                         <div class="img-card">
                             <img class="img-style" :src="elements.avatar" alt="">
                         </div>
@@ -104,7 +104,7 @@
 
                 <!-------------CHAT------------>
                 <div class="text-container">
-                    <div v-for="(data, index) in contacts[userIndex].messages" :class="{'flex':data.status === 'sent' }">
+                    <div class="flex" v-for="(data, index) in contacts[userIndex].messages">
                         <div class="msg-1 b-green rounded" v-if="data.status === 'sent'">
                             <p class="l-text padding-1 ">
                                 {{data.message}}
@@ -135,7 +135,7 @@
                 <!-----------INSERISCI MESSAGGI------------->
                 <div class="chat-row c-gray text-align-c">
                     <label for=""><i class="fa-regular fa-face-smile"></i></label>
-                    <input class="l-text bold rounded no-border" type="text" placeholder="Scrivi un messaggio">
+                    <input class="l-text bold rounded no-border" type="text" placeholder="Scrivi un messaggio" v-model="userMessage" @keyup.enter="sendUserText()">
                     <label for=""><i class="fa-solid fa-microphone"></i></label>
                 </div>
                 <!-----------/INSERISCI MESSAGGI------------->

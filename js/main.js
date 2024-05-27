@@ -171,14 +171,35 @@ createApp({
         },
       ],
       userIndex: 0,
-      messagesNumber: 3,
-      userMessage: null,
+      userMessage: "",
     };
   },
   methods: {
     changeUser(index){
         this.userIndex = index
         this.messagesNumber= this.contacts[this.userIndex].messages.lenght;
-    }
+    },
+    sendUserText() {
+        if (this.userMessage) {
+          this.contacts[this.userIndex].messages.push({
+            date: "21",
+            message: this.userMessage,
+            status: "sent",
+          });
+          this.userMessage = "";
+  
+          setTimeout(() => {
+            answerIa(this.contacts, this.userIndex);
+          }, 1000);
+  
+          function answerIa(contacts, user) {
+            contacts[user].messages.push({
+              date: "",
+              message: "Ok",
+              status: "received",
+            });
+          }
+        }
+      },
   },
 }).mount("#app");
