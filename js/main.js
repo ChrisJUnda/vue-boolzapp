@@ -172,6 +172,7 @@ createApp({
       ],
       userIndex: 0,
       userMessage: "",
+      userSearch: "",
     };
   },
   methods: {
@@ -200,6 +201,15 @@ createApp({
             });
           }
         }
+      },
+      searchContact() {
+        this.contacts.forEach((contact) => {
+          if (
+            contact.name.toLowerCase().includes(this.userSearch.toLowerCase())
+          ) {
+            contact.visible = true;
+          } else contact.visible = false;
+        });
       },
   },
 }).mount("#app");

@@ -58,7 +58,7 @@
                     <div>
                         <span class="fa-solid fa-magnifying-glass c-gray"></span>
                     </div>
-                    <input class="l-text" type="text" placeholder="Cerca o inizia una nuova chat">
+                    <input class="l-text" v-model="userSearch" @keyup="searchContact()" type="text" placeholder="Cerca o inizia una nuova chat">
                 </div>
                 <!---------/RICERCA--------->
 
@@ -66,7 +66,7 @@
 
                 <!--LISTA DEI CONTATTI-->
                 <div class="contact-list ">
-                    <div class="contact-card" v-for="(elements, index) in contacts" @click="changeUser(index)" :class="{ selected_card : userIndex === index}" >
+                    <div class="contact-card" v-for="(elements, index) in contacts" @click="changeUser(index)" :class="{ selected_card : userIndex === index}" v-show="contacts[index].visible" >
                         <div class="img-card">
                             <img class="img-style" :src="elements.avatar" alt="">
                         </div>
