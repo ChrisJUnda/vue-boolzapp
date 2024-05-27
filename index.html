@@ -66,7 +66,7 @@
 
                 <!--LISTA DEI CONTATTI-->
                 <div class="contact-list ">
-                    <div class="contact-card" v-for="(elements, index) in contacts">
+                    <div class="contact-card" v-for="(elements, index) in contacts" @click="changeUser(index)">
                         <div class="img-card">
                             <img class="img-style" :src="elements.avatar" alt="">
                         </div>
@@ -86,10 +86,10 @@
                 <!-----------CONTATTO UTENTE------------>
                 <div class="contact-row b-light-grey">
                     <div class="img-contact">
-                        <img class="img-style" src="./img/avatar_1.jpg" alt="">
+                        <img class="img-style" :src="contacts[userIndex].avatar" alt="">
                     </div>
                     <div class="contact-info">
-                        <h3 class="l-text">Michele</h3>
+                        <h3 class="l-text">{{contacts[userIndex].name}}</h3>
                         <p class="s-text c-gray margin-top">Ultimo accesso oggi alle 16:26</p>
                     </div>
                     <div class="contact-options c-light-gray icon-set-up-options">
@@ -104,28 +104,30 @@
 
                 <!-------------CHAT------------>
                 <div class="text-container">
-                    <div class="msg-1 b-green rounded">
-                        <div>
+                    <div v-for="(data, index) in contacts[userIndex].messages" :class="{'flex':data.status === 'sent' }">
+                        <div class="msg-1 b-green rounded" v-if="data.status === 'sent'">
                             <p class="l-text padding-1 ">
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit necessitatibus illo hic magnam ipsa perferendis consequuntur nulla ab, expedita facere atque enim fugiat, unde vitae id sunt error. Natus, repellendus.
+                                {{data.message}}
                             </p>
+                            <div class="msg-bar c-gray text-align-c">
+                                <div>
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </div>
+                                <div class="s-text">16:13</div>
+                            </div>
                         </div>
-                        <div class="msg-bar c-gray text-align-c">
-                            <div><i class="fa-solid fa-chevron-down"></i></div>
-                            <div class="s-text">16:13</div>
-                        </div>
-                    </div>
-                    <div class="msg-2 b-white rounded">
-                        <div>
+                        <div class="msg-2 b-white rounded" v-else>
                             <p class="l-text padding-1 ">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium nostrum in nihil fugiat labore quibusdam, quo eius magni! Temporibus culpa harum est beatae et. Quo cumque accusamus fuga ipsum optio.
+                                {{data.message}}
                             </p>
+                            <div class="msg-bar c-gray text-align-c">
+                                <div><i class="fa-solid fa-chevron-down"></i></div>
+                                <div class="s-text">16:15</div>
+                            </div>
                         </div>
-                        <div class="msg-bar c-gray text-align-c">
-                            <div><i class="fa-solid fa-chevron-down"></i></div>
-                            <div class="s-text">16:15</div>
-                        </div>
+                        
                     </div>
+                    
                 </div>
                 <!-------------/CHAT------------>
 

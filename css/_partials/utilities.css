@@ -40,6 +40,12 @@
     display: none;
 }
 
+/****flex****/
+
+.flex{
+    display: flex;
+}
+
 
 
 

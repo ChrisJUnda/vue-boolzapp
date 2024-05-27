@@ -170,7 +170,15 @@ createApp({
           ],
         },
       ],
+      userIndex: 0,
+      messagesNumber: 3,
+      userMessage: null,
     };
   },
-  methods: {},
+  methods: {
+    changeUser(index){
+        this.userIndex = index
+        this.messagesNumber= this.contacts[this.userIndex].messages.lenght;
+    }
+  },
 }).mount("#app");
